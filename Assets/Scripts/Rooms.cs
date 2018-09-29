@@ -1,0 +1,3 @@
+public enum Room {
+    PROPULSION,
+};
