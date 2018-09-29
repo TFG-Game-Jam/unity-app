@@ -1026,8 +1026,8 @@ GameObject:
   - component: {fileID: 54874396675185872}
   - component: {fileID: 114196194399120430}
   m_Layer: 0
-  m_Name: Space_Invader
-  m_TagString: Untagged
+  m_Name: InvaderPrefab
+  m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4460,6 +4460,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc22df734898002409ffdb7281b0e220, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  x_speed: 1
-  y_speed: 0

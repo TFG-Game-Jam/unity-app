@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeUV : MonoBehaviour {
+public class ChangeComputerUV : MonoBehaviour {
 	const int ROOM_COUNT = 1;
 	Texture2D[] textures = new Texture2D[2 * ROOM_COUNT + 1];
 	int counter = 0;
@@ -31,7 +31,9 @@ public class ChangeUV : MonoBehaviour {
 		String fullPath = Application.dataPath + "/" + path;
 		UriBuilder uriBuilder = new UriBuilder(fullPath);
 		uriBuilder.Scheme = "file";
-		return uriBuilder.ToString();
+		string s = uriBuilder.ToString();
+		Debug.Log(s);
+		return s;
 	}
 
 	void FixedUpdate() {

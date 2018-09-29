@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DestroyOnColision : MonoBehaviour {
-
+public class EnemyCollision : MonoBehaviour {
+	
 	void OnCollisionEnter (Collision col)
     {
+		Debug.Log(col.gameObject.tag);
+		if (col.gameObject.tag == "enemy"){
+			Debug.Log("Enemy collision!");
+		}
 		Destroy(col.gameObject);
-		Destroy(this.gameObject);
     }
 }

@@ -44,6 +44,7 @@ public class Quiver : MonoBehaviour {
 		ReleaseLaser(laser);
 		Rigidbody laserRigidbody = laser.GetComponent<Rigidbody>();
 		laserRigidbody.isKinematic = false;
-		laserRigidbody.AddRelativeForce( (new Vector3(0, 1, 0)) * 40, ForceMode.VelocityChange);
+		laserRigidbody.useGravity = false;
+		laserRigidbody.AddRelativeForce( (new Vector3(0, 1, 0)) * 60, ForceMode.VelocityChange);
 	}
 }
