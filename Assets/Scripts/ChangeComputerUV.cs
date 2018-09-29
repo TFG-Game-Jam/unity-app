@@ -4,37 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ChangeComputerUV : MonoBehaviour {
+	public Texture2D[] textures;
+
 	const int ROOM_COUNT = 1;
-	Texture2D[] textures = new Texture2D[2 * ROOM_COUNT + 1];
 	int counter = 0;
 	int currentRoom = 0;
 	int[] roomStatus = new int[ROOM_COUNT]{0};
-
-	IEnumerator Start () {
-		string[] textureFiles = new string[] {
-			"UVs/Monitor/PropulsionWarning.png",
-			"UVs/Monitor/PropulsionError.png",
-			"UVs/Monitor/AllOK.png",
-		};
-		for (int i = 0; i < textureFiles.Length; i++) {
-        	textures[i] = new Texture2D(4, 4, TextureFormat.DXT1, false);
-			using (WWW www = new WWW(localPathToUri(textureFiles[i])))
-			{
-				yield return www;
-				www.LoadImageIntoTexture(textures[i]);
-			}
-		}
-		setRoomStatus(Room.PROPULSION, 1);
-	}
-
-	string localPathToUri(string path) {
-		String fullPath = Application.dataPath + "/" + path;
-		UriBuilder uriBuilder = new UriBuilder(fullPath);
-		uriBuilder.Scheme = "file";
-		string s = uriBuilder.ToString();
-		Debug.Log(s);
-		return s;
-	}
 
 	void FixedUpdate() {
 		counter++;
