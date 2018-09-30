@@ -9,18 +9,18 @@ public class Spawner : MonoBehaviour
     public GameObject invader3;
     public GameObject invader4;
 
-    // Use this for initialization
-    void Start()
-    {
-        float X_BOUND = 20;
-        float BLOCK_H = 4;
-        float BLOCK_W = 4;
-        float MAX_Z = 120;
+    static float X_BOUND = 20;
+    float BLOCK_H = 4;
+    float BLOCK_W = 4;
+    static float MAX_Z = 120;
+    
+    float z = MAX_Z;
+    float x = X_BOUND;
+    public static int wave = 2;
 
-        float z = MAX_Z;
+    void Generate_Wave(float BLOCK_H, float BLOCK_W){
         for (int i = 0; i < BLOCK_H; i++)
         {
-            float x = X_BOUND;
             for (int j = 0; j < BLOCK_W; j++)
             {
                 GameObject invader;
@@ -47,8 +47,11 @@ public class Spawner : MonoBehaviour
 
     }
 
-    // // Update is called once per frame
-    // void Update () {
-
-    // }
+    void Update()
+    {
+        if(GameObject.FindGameObjectsWithTag("enemy").Length == 0) {
+            wave++;
+            Generate_Wave(wave,wave);
+        }
+    }
 }
