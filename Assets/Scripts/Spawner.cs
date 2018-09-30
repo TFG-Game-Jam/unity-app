@@ -9,13 +9,14 @@ public class Spawner : MonoBehaviour
     public GameObject invader3;
     public GameObject invader4;
 
+    // Use this for initialization
     void Start()
     {
         float X_BOUND = 20;
-        float BLOCK_H = 3;
-        float BLOCK_W = 3;
+        float BLOCK_H = 4;
+        float BLOCK_W = 4;
         float MAX_Z = 120;
-        Debug.Log("Started");
+
         float z = MAX_Z;
         for (int i = 0; i < BLOCK_H; i++)
         {
@@ -25,19 +26,15 @@ public class Spawner : MonoBehaviour
                 GameObject invader;
 
                 if ((i % 2 == 0) && (j % 2 == 0)) {
-                    Debug.Log("i1");
                     invader = Instantiate(invader1);
                 }
                 else if ((i % 2 == 1) && (j % 2 == 1)) {
-                    Debug.Log("i2");
                     invader = Instantiate(invader2);
                 }
                 else if ((i % 2 == 1) && (j % 2 == 0)) {
-                    Debug.Log("i3");
                     invader = Instantiate(invader3);
                 }
                 else {
-                    Debug.Log("i4");
                     invader = Instantiate(invader4);
                 }
 
@@ -49,4 +46,9 @@ public class Spawner : MonoBehaviour
         }
 
     }
+
+    // // Update is called once per frame
+    // void Update () {
+
+    // }
 }

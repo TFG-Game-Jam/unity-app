@@ -1025,6 +1025,7 @@ GameObject:
   - component: {fileID: 65743395482970582}
   - component: {fileID: 54874396675185872}
   - component: {fileID: 114196194399120430}
+  - component: {fileID: 114187019909401664}
   m_Layer: 0
   m_Name: InvaderPrefab
   m_TagString: enemy
@@ -4449,6 +4450,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 3.14, y: 2.1, z: 0.34}
   m_Center: {x: 0, y: 1.01, z: -0.12}
+--- !u!114 &114187019909401664
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1960099590479124}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f191b9b4489484c9cd968d5964d6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShotPrefab: {fileID: 1746699364047984, guid: 5157fa4b32645f548a3c189e6f39e696, type: 2}
 --- !u!114 &114196194399120430
 MonoBehaviour:
   m_ObjectHideFlags: 1

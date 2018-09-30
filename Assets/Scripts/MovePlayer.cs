@@ -19,6 +19,8 @@ public class MovePlayer : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate () {
 
+		// GetComponent<Rigidbody>().angularVelocity = new Vector3(0, 0, 0); //enforce no rotation
+
 		left = Networking.playerActions.port;
 		right = Networking.playerActions.starboard;
 

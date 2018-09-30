@@ -37,7 +37,8 @@ public class Quiver : MonoBehaviour {
   	// listen for click events
 	  	bool available_ammo = Networking.playerActions.loadCyan || Networking.playerActions.loadGreen || Networking.playerActions.loadPurple|| Networking.playerActions.loadWhite;
   		if (GvrControllerInput.ClickButtonDown && available_ammo) {
-    	ShootLasers();
+			Networking.shot = true;
+    		ShootLasers();
   		}
 		// if(!available_ammo){
 		// 	DoBeep();

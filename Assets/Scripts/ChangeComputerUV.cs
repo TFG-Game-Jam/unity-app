@@ -6,10 +6,9 @@ using UnityEngine;
 public class ChangeComputerUV : MonoBehaviour {
 	public Texture2D[] textures;
 
-	const int ROOM_COUNT = 1;
+	const int ROOM_COUNT = 3;
 	int counter = 0;
 	int currentRoom = 0;
-	int[] roomStatus = new int[ROOM_COUNT]{0};
 
 	void FixedUpdate() {
 		counter++;
@@ -21,16 +20,12 @@ public class ChangeComputerUV : MonoBehaviour {
 
 	void updateRoom() {
 		for (int i = (currentRoom + 1) % ROOM_COUNT; i != currentRoom; i = (i + 1) % ROOM_COUNT) {
-			if (roomStatus[i] != 0) {
+			if (Networking.playerActions.roomState[i] != 0) {
 				currentRoom = i;
 				break;
 			}
 		}
-		GetComponent<Renderer>().material.mainTexture = roomStatus[currentRoom] == 0 ? textures[2 * ROOM_COUNT] :
-			(roomStatus[currentRoom] == 1 ? textures[2 * currentRoom] : textures[2 * currentRoom + 1]);
-	}
-
-	void setRoomStatus(Room room, int status) {
-		roomStatus[(int)room] = status;
+		GetComponent<Renderer>().material.mainTexture = Networking.playerActions.roomState[currentRoom] == 0 ? textures[2 * ROOM_COUNT] :
+			(Networking.playerActions.roomState[currentRoom] == 1 ? textures[2 * currentRoom] : textures[2 * currentRoom + 1]);
 	}
 }
