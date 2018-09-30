@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 136206169246064204}
   - component: {fileID: 54288454385631220}
   - component: {fileID: 114962773765993762}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Shot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -120,7 +120,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1746699364047984}
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
   m_Height: 2

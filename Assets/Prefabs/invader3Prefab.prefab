@@ -23,7 +23,7 @@ GameObject:
   - component: {fileID: 54648082768297064}
   - component: {fileID: 65230470244005598}
   - component: {fileID: 114481352679777822}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: invader3Prefab
   m_TagString: enemy
   m_Icon: {fileID: 0}
