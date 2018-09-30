@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
@@ -6,6 +7,7 @@ using UnityEditor;
 public class Quiver : MonoBehaviour {
 	public GameObject arrowPrefab;
 	public AudioClip wrong;
+	public AudioClip shoot;
 
 	private AudioSource audioSource;
 	private GameObject _heldLaser;
@@ -17,9 +19,9 @@ public class Quiver : MonoBehaviour {
 		_heldLaser.transform.SetParent(transform, false);
 		_heldLaser.transform.localPosition = new Vector3(0, 0, 0);
         float y_ang = _heldLaser.transform.eulerAngles.y;
-		if (abs(y_ang - Networking.playerActions.aimAngle) > 30) {
+		if (Math.Abs(y_ang - Networking.playerActions.aimAngle) > 30) {
 			Destroy(laser);
-			audioSource.PlayOneShot(wrong, 1.);
+			audioSource.PlayOneShot(wrong, 1F);
 		}
         _heldLaser.transform.eulerAngles = new Vector3(90, y_ang, 0);
 
@@ -44,10 +46,9 @@ public class Quiver : MonoBehaviour {
 	  	bool available_ammo = Networking.playerActions.loadCyan || Networking.playerActions.loadGreen || Networking.playerActions.loadPurple|| Networking.playerActions.loadWhite;
   		if (GvrControllerInput.ClickButtonDown) {
 			if (!available_ammo) {
-			Networking.shot = true;
     			ShootLasers();
 			} else {
-				audioSource.PlayOneShot(wrong, 1.);
+				audioSource.PlayOneShot(wrong, 1F);
 			}
   		}
 	}
@@ -80,5 +81,7 @@ public class Quiver : MonoBehaviour {
 		laserRigidbody.isKinematic = false;
 		laserRigidbody.useGravity = false;
 		laserRigidbody.AddRelativeForce( (new Vector3(0, 1, 0)) * 60, ForceMode.VelocityChange);
+		audioSource.PlayOneShot(shoot, 1F);
+		Networking.shot = true;
 	}
 }
