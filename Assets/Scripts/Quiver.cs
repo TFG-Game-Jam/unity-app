@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class Quiver : MonoBehaviour {
 	public GameObject arrowPrefab;
-
 
 	private GameObject _heldLaser;
 
@@ -13,8 +13,10 @@ public class Quiver : MonoBehaviour {
 		
 		// make a child of this object
 		_heldLaser.transform.SetParent(transform, false);
-		_heldLaser.transform.localPosition = new Vector3(0, 0, 1);
-		_heldLaser.transform.localEulerAngles = new Vector3(90, 0, 0);
+		_heldLaser.transform.localPosition = new Vector3(0, 0, 0);
+        float y_ang = _heldLaser.transform.eulerAngles.y;
+        _heldLaser.transform.eulerAngles = new Vector3(90, y_ang, 0);
+		
 	}
 
 	private void ReleaseLaser(GameObject laser) {
@@ -33,12 +35,17 @@ public class Quiver : MonoBehaviour {
 	void Update() {
 
   	// listen for click events
-  		if (GvrControllerInput.ClickButtonDown) {
+	  	bool available_ammo = Networking.playerActions.loadCyan || Networking.playerActions.loadGreen || Networking.playerActions.loadPurple|| Networking.playerActions.loadWhite;
+  		if (GvrControllerInput.ClickButtonDown && available_ammo) {
     	ShootLasers();
   		}
+		// if(!available_ammo){
+		// 	DoBeep();
+		// }
 	}
 
 	private void ShootLasers() {
+
 		GameObject laser =  Instantiate(arrowPrefab);
 		AllignLaser(laser);
 		ReleaseLaser(laser);
