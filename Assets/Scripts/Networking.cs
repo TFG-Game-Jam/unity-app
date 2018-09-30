@@ -9,7 +9,7 @@ public class Networking : MonoBehaviour {
     //This class is responsible for communication between Unity and Server
 
     //Player's actions management
-    
+
     //Class with directions, actions and coloured shots
     [Serializable]
     public class Actions
@@ -27,7 +27,7 @@ public class Networking : MonoBehaviour {
 
     public static Actions playerActions = new Actions();
 
-    public int update = 0; 
+    public int update = 0;
 
     //Method to get the class's atribute values
     public IEnumerator GetPlayerActions()
@@ -106,7 +106,7 @@ public class Networking : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-		
+
 	}
 
     // Update is called once per fixed frame time
@@ -114,7 +114,7 @@ public class Networking : MonoBehaviour {
     private void FixedUpdate()
     {
 
-        
+
         if (update == 3)
         {
             StartCoroutine(GetPlayerActions());

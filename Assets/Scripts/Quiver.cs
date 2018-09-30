@@ -5,18 +5,24 @@ using UnityEditor;
 
 public class Quiver : MonoBehaviour {
 	public GameObject arrowPrefab;
+	public AudioClip wrong;
 
+	private AudioSource audioSource;
 	private GameObject _heldLaser;
 
 	private void AllignLaser(GameObject laser) {
 		_heldLaser = laser;
-				
+
 		// make a child of this object
 		_heldLaser.transform.SetParent(transform, false);
 		_heldLaser.transform.localPosition = new Vector3(0, 0, 0);
         float y_ang = _heldLaser.transform.eulerAngles.y;
+		if (abs(y_ang - Networking.playerActions.aimAngle) > 30) {
+			Destroy(laser);
+			audioSource.PlayOneShot(wrong, 1.);
+		}
         _heldLaser.transform.eulerAngles = new Vector3(90, y_ang, 0);
-		
+
 	}
 
 	private void ReleaseLaser(GameObject laser) {
@@ -25,24 +31,25 @@ public class Quiver : MonoBehaviour {
 		laser = null;
 	}
 
-	
+
 	// Use this for initialization
 	void Start () {
-		
+		audioSource = GetComponent<AudioSource>();
 	}
-	
+
 	// Update is called once per frame
 	void Update() {
 
   	// listen for click events
 	  	bool available_ammo = Networking.playerActions.loadCyan || Networking.playerActions.loadGreen || Networking.playerActions.loadPurple|| Networking.playerActions.loadWhite;
-  		if (GvrControllerInput.ClickButtonDown && available_ammo) {
+  		if (GvrControllerInput.ClickButtonDown) {
+			if (!available_ammo) {
 			Networking.shot = true;
-    		ShootLasers();
+    			ShootLasers();
+			} else {
+				audioSource.PlayOneShot(wrong, 1.);
+			}
   		}
-		// if(!available_ammo){
-		// 	DoBeep();
-		// }
 	}
 
 	private void ShootLasers() {
@@ -66,7 +73,7 @@ public class Quiver : MonoBehaviour {
 		else if (loadPurple) {
 			laser.GetComponent<Renderer> ().material.color = new Color(1, 0, 1, 1); // purple (magenta)
 		}
-		
+
 		AllignLaser(laser);
 		ReleaseLaser(laser);
 		Rigidbody laserRigidbody = laser.GetComponent<Rigidbody>();
