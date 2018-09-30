@@ -12,7 +12,7 @@ public class Quiver : MonoBehaviour {
 	private AudioSource audioSource;
 	private GameObject _heldLaser;
 
-	private void AllignLaser(GameObject laser) {
+	private bool AllignLaser(GameObject laser) {
 		_heldLaser = laser;
 
 		// make a child of this object
@@ -22,8 +22,10 @@ public class Quiver : MonoBehaviour {
 		if (Math.Abs(y_ang - Networking.playerActions.aimAngle) > 30) {
 			Destroy(laser);
 			audioSource.PlayOneShot(wrong, 1F);
+			return false;
 		}
         _heldLaser.transform.eulerAngles = new Vector3(90, y_ang, 0);
+		return true;
 
 	}
 
@@ -45,7 +47,7 @@ public class Quiver : MonoBehaviour {
   	// listen for click events
 	  	bool available_ammo = Networking.playerActions.loadCyan || Networking.playerActions.loadGreen || Networking.playerActions.loadPurple|| Networking.playerActions.loadWhite;
   		if (GvrControllerInput.ClickButtonDown) {
-			if (!available_ammo) {
+			if (available_ammo) {
     			ShootLasers();
 			} else {
 				audioSource.PlayOneShot(wrong, 1F);
@@ -75,7 +77,9 @@ public class Quiver : MonoBehaviour {
 			laser.GetComponent<Renderer> ().material.color = new Color(1, 0, 1, 1); // purple (magenta)
 		}
 
-		AllignLaser(laser);
+		if (!AllignLaser(laser)) {
+			return;
+		}
 		ReleaseLaser(laser);
 		Rigidbody laserRigidbody = laser.GetComponent<Rigidbody>();
 		laserRigidbody.isKinematic = false;
