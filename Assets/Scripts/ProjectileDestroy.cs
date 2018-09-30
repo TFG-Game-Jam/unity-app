@@ -6,9 +6,14 @@ public class ProjectileDestroy : MonoBehaviour {
 
 	void OnCollisionEnter (Collision col)
     {
+			Color projectileColor = this.gameObject.GetComponent<Renderer> ().material.color;
+			
 			Destroy(this.gameObject);
 			if (col.gameObject.tag == "enemy"){
-				Destroy(col.gameObject);
+				Color enemyColor = col.gameObject.GetComponent<Renderer> ().material.color;
+				if (projectileColor == enemyColor) {
+					Destroy(col.gameObject);
+				}
 			}
     }
 }
